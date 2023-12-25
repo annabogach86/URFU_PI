@@ -18,7 +18,11 @@ def test_read_main():
     assert response.json() == {"message": "Hello, World!"}
 
 def test_predict():
-    item = Item(context="The Universe contains everything that exists", question="What is at the center of the solar system?")
+    item = Item(context="The Universe contains everything that exists – not only the Earth and everything on it,but also all the planets, stars,
+and galaxies, and the space in between them. The sun, at the center of the solar system, is just one of about 100 billion stars
+in our galaxy, or collection of stars, called the Milky Way. Astronomers have estimated that there are about 100 billion other
+galaxies in the universe. Most scientists think that the universe formed about 15 billion years ago in an enormous explosion
+called the big bang.They also think that the universe is expanding.", question="What is at the center of the solar system?")
     response = client.post("/predict/", json=item.dict())
     
     assert response.status_code == 200
@@ -47,6 +51,10 @@ def test_predict_exception():
         raise Exception("Mocked exception")
 
     app.classifier = mock_classifier
-    item = Item(context="The Universe contains everything that exists", question="What is at the center of the solar system?")
+    item = Item(context="The Universe contains everything that exists – not only the Earth and everything on it,but also all the planets, stars,
+and galaxies, and the space in between them. The sun, at the center of the solar system, is just one of about 100 billion stars
+in our galaxy, or collection of stars, called the Milky Way. Astronomers have estimated that there are about 100 billion other
+galaxies in the universe. Most scientists think that the universe formed about 15 billion years ago in an enormous explosion
+called the big bang.They also think that the universe is expanding.", question="What is at the center of the solar system?")
     response = client.post("/predict/", json=item.dict())
     assert response.status_code == 500  # HTTP 500 Internal Server Error
