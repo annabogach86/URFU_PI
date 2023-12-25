@@ -8,7 +8,7 @@ Created on Mon Dec 11 19:07:31 2023
 
 from fastapi.testclient import TestClient
 from fastapi import HTTPException
-from app import app, Item
+from app import api, Item
 
 client = TestClient(app)
 
